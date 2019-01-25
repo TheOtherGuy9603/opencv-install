@@ -8,12 +8,12 @@ sudo -H pip3 install -U pip numpy
 
 git clone https://github.com/opencv/opencv.git
 cd opencv
-git checkout 3.4.1
+git checkout master
 cd ..
 
 git clone https://github.com/opencv/opencv_contrib.git
 cd opencv_contrib
-git checkout 3.4.1
+git checkout master
 cd ..
 
 cd opencv
@@ -22,7 +22,7 @@ cd build
 
 cmake -D BUILD_opencv_python2=On -D BUILD_opencv_python3=On -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules -D WITH_TBB=ON -D WITH_OPENMP=ON -D WITH_IPP=ON -D CMAKE_BUILD_TYPE=RELEASE -D BUILD_EXAMPLES=OFF -D WITH_NVCUVID=ON -D WITH_CUDA=ON -D BUILD_DOCS=OFF -D BUILD_PERF_TESTS=OFF -D BUILD_TESTS=OFF -D WITH_CSTRIPES=ON -D WITH_OPENCL=ON CMAKE_INSTALL_PREFIX=/usr/local/ ..
 
-make -j4
+make -j$(nproc)
 sudo make install
 sudo sh -c 'echo "/usr/local/lib" >> /etc/ld.so.conf.d/opencv.conf'
 sudo ldconfig
